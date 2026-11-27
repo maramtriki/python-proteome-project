@@ -1,3 +1,6 @@
+
+# Question 1
+
 def read_words(filename):
     words = []
 
@@ -11,8 +14,10 @@ def read_words(filename):
 
 words = read_words("english-common-words.txt")
 print("Nombre de mots sélectionnés :", len(words))
-print(words[:10])
 
+
+
+# Question 2
 
 def read_sequences(filename):
     proteome = {}
@@ -38,6 +43,8 @@ print("Nombre de protéines :", len(proteome))
 print("Séquence de O95139 :", proteome["O95139"])
 
 
+# Question 3
+
 def search_words_in_proteome(words, proteome):
     results = {}
 
@@ -47,14 +54,14 @@ def search_words_in_proteome(words, proteome):
             if word in sequence:
                 count += 1
         results[word] = count
-        if count > 0 :
-        print(word, "found in", count, "sequences")
+        if count > 0:
+            print(word, "found in", count, "sequences")
+
     return results
 
-words = read_words("english-common-words.txt")
-proteome = read_sequences("human-proteome.fasta")
-results = search_words_in_proteome(words, proteome) 
 
+
+# Question 4
 
 def find_most_frequent_word(results, proteome):
     max_word = ""
@@ -64,7 +71,7 @@ def find_most_frequent_word(results, proteome):
         if count > max_count:
             max_count = count
             max_word = word
-            
+
     percentage = (max_count / len(proteome)) * 100
     print(max_word, "found in", max_count, "sequences")
     print(" The most frequent word is ", max_word )
@@ -72,10 +79,9 @@ def find_most_frequent_word(results, proteome):
 
     return max_word, max_count, percentage
 
-words = read_words("english-common-words.txt")
-proteome = read_sequences("human-proteome.fasta")
-results = search_words_in_proteome(words, proteome)
-find_most_frequent_word(results, proteome)
+
+
+# Question 5
 
 def search_word_occurrences(words, proteome):
     results = {}
@@ -87,6 +93,38 @@ def search_word_occurrences(words, proteome):
         results[word] = count
     return results
 
+def find_most_frequent_occurrence(results):
+
+    max_word = ""
+    max_count = 0
+
+    for word, count in results.items():
+
+        if count > max_count:
+            max_count = count
+            max_word = word
+
+    print("Pour la question 5 :")
+    print("The most frequent word in the human proteome is:", max_word)
+    print("Number of occurrences:", max_count)
+
+    return max_word, max_count
+
+
+# Programme principal
+
+words = read_words("english-common-words.txt")
+proteome = read_sequences("human-proteome.fasta")
+
+# Question 3
+results = search_words_in_proteome(words, proteome)
+
+# Question 4
+find_most_frequent_word(results, proteome)
+
+# Question 5
+occurrences = search_word_occurrences(words, proteome)
+find_most_frequent_occurrence(occurrences)
 
 
 
